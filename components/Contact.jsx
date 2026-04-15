@@ -1,47 +1,47 @@
-import { assets, contactCards, siteData } from '@/assets/assets';
+import { assets, contactCards } from '@/assets/assets';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 
 const Contact = () => {
-  const [result, setResult] = useState('');
+  const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    if (toast && toast.type !== 'sending') {
+      const timer = setTimeout(() => setToast(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
 
     if (!accessKey) {
-      const params = new URLSearchParams({
-        subject: `Portfolio inquiry from ${name}`,
-        body: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      });
-
-      setResult('Opening your email client...');
-      window.location.href = `mailto:${siteData.email}?${params.toString()}`;
-      event.target.reset();
+      setToast({ type: 'error', message: 'Something went wrong. Please try again later.' });
       return;
     }
 
-    setResult('Sending...');
+    setToast({ type: 'sending', message: 'Sending your message...' });
     formData.append('access_key', accessKey);
 
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData,
-    });
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.success) {
-      setResult('Form submitted successfully');
-      event.target.reset();
-    } else {
-      console.log('Error', data);
-      setResult(data.message);
+      if (data.success) {
+        setToast({ type: 'success', message: 'Message sent successfully!' });
+        event.target.reset();
+      } else {
+        setToast({ type: 'error', message: 'Failed to send message. Please try again.' });
+      }
+    } catch {
+      setToast({ type: 'error', message: 'Network error. Please check your connection.' });
     }
   };
 
@@ -152,8 +152,35 @@ const Contact = () => {
           Submit now <Image src={assets.right_arrow_white} alt="" className="w-4" />
         </motion.button>
 
-        <p className="mt-4 text-center">{result}</p>
       </motion.form>
+
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 50, x: '-50%' }}
+            transition={{ duration: 0.3 }}
+            className={`fixed bottom-8 left-1/2 z-50 flex items-center gap-3 rounded-xl px-6 py-4 shadow-lg ${
+              toast.type === 'success'
+                ? 'bg-green-600 text-white'
+                : toast.type === 'error'
+                  ? 'bg-red-600 text-white'
+                  : 'bg-gray-800 text-white'
+            }`}
+          >
+            <span className="text-lg">
+              {toast.type === 'success' ? '\u2713' : toast.type === 'error' ? '\u2717' : '\u2026'}
+            </span>
+            <span className="text-sm font-medium">{toast.message}</span>
+            {toast.type !== 'sending' && (
+              <button onClick={() => setToast(null)} className="ml-2 text-white/70 hover:text-white text-lg">
+                &times;
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

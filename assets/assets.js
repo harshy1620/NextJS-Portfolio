@@ -90,8 +90,8 @@ export const siteData = {
   resumePath: '/Harsh_Yadav_FrontEnd_Developer_Resume.pdf',
   heroTitle: 'Full Stack Developer building fast, scalable digital products.',
   heroDescription:
-    'Full Stack Developer skilled in React.js, Next.js, Node.js, and Express.js, with hands-on experience in building end-to-end products, API development, database design, performance optimization, and AI-based automation.',
-  heroBadges: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'AI Automation'],
+    'Full Stack Developer skilled in React.js, Next.js, Node.js, and Express.js, with hands-on experience in building end-to-end products, API development, database design, CI/CD pipelines, AWS cloud deployment, and AI-based automation.',
+  heroBadges: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'AWS', 'CI/CD'],
 };
 
 export const navigationLinks = [
@@ -160,9 +160,9 @@ export const serviceData = [
   },
   {
     icon: assets.graphics_icon,
-    title: 'API Design & Backend Systems',
+    title: 'DevOps & Cloud Deployment',
     description:
-      'I design and build RESTful APIs with Node.js, Express, Sequelize, and third-party integrations that power reliable, production-ready products.',
+      'I set up CI/CD pipelines with GitHub Actions, deploy to AWS S3 + CloudFront, and automate build-test-deploy workflows for reliable, zero-downtime releases.',
   },
 ];
 
@@ -176,8 +176,12 @@ export const skillGroups = [
     items: ['React.js', 'Next.js', 'Gatsby', 'Node.js', 'Express.js', 'Redux', 'Material UI', 'Tailwind CSS', 'Bootstrap'],
   },
   {
+    title: 'DevOps & Cloud',
+    items: ['AWS S3', 'CloudFront', 'GitHub Actions', 'CI/CD Pipelines', 'Docker', 'Vercel', 'Netlify'],
+  },
+  {
     title: 'Tools',
-    items: ['Git', 'Postman', 'VS Code', 'Firebase'],
+    items: ['Git', 'GitHub', 'Postman', 'VS Code', 'Firebase'],
   },
   {
     title: 'Databases',
@@ -185,7 +189,7 @@ export const skillGroups = [
   },
   {
     title: 'Concepts',
-    items: ['REST APIs', 'SEO', 'Performance Optimization', 'OOPs', 'OpenAI API Integration', 'Automation'],
+    items: ['REST APIs', 'CI/CD', 'SEO', 'Performance Optimization', 'OOPs', 'OpenAI API Integration', 'Automation'],
   },
   {
     title: 'Certifications',

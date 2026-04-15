@@ -43,9 +43,9 @@ const About = ({ isDarkMode }) => {
         </p>
 
         <p className="mb-10 max-w-2xl text-gray-600 dark:text-white/75">
-          I work across the entire stack — React.js, Next.js, and Gatsby on the frontend, and Node.js, Express,
-          Sequelize, MongoDB, and MySQL on the backend, along with API integrations, OpenAI-based automation, and
-          cloud services.
+          I work across the entire stack — React.js, Next.js, and Gatsby on the frontend, Node.js, Express,
+          Sequelize, MongoDB, and MySQL on the backend, and GitHub Actions, AWS S3, and CloudFront for CI/CD and
+          cloud deployment.
         </p>
 
         <motion.ul
