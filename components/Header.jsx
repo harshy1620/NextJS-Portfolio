@@ -2,8 +2,11 @@ import { assets, heroStats, siteData } from '@/assets/assets';
 import Image from 'next/image';
 import React from 'react';
 import { motion } from 'motion/react';
+import { TypeAnimation } from 'react-type-animation';
 
 const Header = () => {
+  const typeSequence = siteData.heroRoles.flatMap((role) => [role, 1500]);
+
   return (
     <div
       id="top"
@@ -41,7 +44,16 @@ const Header = () => {
         transition={{ duration: 0.8, delay: 0.5 }}
         className="text-4xl sm:text-6xl lg:text-[68px] font-Ovo max-w-4xl"
       >
-        {siteData.heroTitle}
+        <TypeAnimation
+          sequence={typeSequence}
+          wrapper="span"
+          speed={50}
+          deletionSpeed={70}
+          repeat={Infinity}
+          cursor={true}
+          className="inline-block"
+        />
+        <span className="block mt-2 text-2xl sm:text-4xl">{siteData.heroTitleSuffix}</span>
       </motion.h1>
 
       <motion.p

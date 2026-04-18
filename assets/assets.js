@@ -88,7 +88,8 @@ export const siteData = {
   github: 'https://github.com/harshy1620',
   linkedin: 'https://www.linkedin.com/in/harsh-yadav-b49b0a140',
   resumePath: '/Harsh_Yadav_FrontEnd_Developer_Resume.pdf',
-  heroTitle: 'Full Stack Developer building fast, scalable digital products.',
+  heroRoles: ['Full Stack Developer', 'React Developer', 'Frontend Developer', 'Next.js Developer'],
+  heroTitleSuffix: 'building fast, scalable digital products.',
   heroDescription:
     'Full Stack Developer skilled in React.js, Next.js, Node.js, and Express.js, with hands-on experience in building end-to-end products, API development, database design, CI/CD pipelines, AWS cloud deployment, and AI-based automation.',
   heroBadges: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'AWS', 'CI/CD'],
@@ -229,13 +230,48 @@ export const educationData = {
   score: '78.6%',
 };
 
+import {
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiExpress,
+  SiTypescript,
+  SiJavascript,
+  SiTailwindcss,
+  SiMongodb,
+  SiMysql,
+  SiGit,
+  SiGithub,
+  SiGithubactions,
+  SiDocker,
+  SiVercel,
+  SiPostman,
+  SiFirebase,
+  SiFigma,
+} from 'react-icons/si';
+import { FaAws } from 'react-icons/fa';
+import { VscVscode } from 'react-icons/vsc';
+
 export const toolsData = [
-  assets.react_icon,
-  assets.vscode,
-  assets.firebase,
-  assets.mongodb,
-  assets.figma,
-  assets.git,
+  { name: 'React', Icon: SiReact, color: '#61DAFB' },
+  { name: 'Next.js', Icon: SiNextdotjs, color: '#000000' },
+  { name: 'Node.js', Icon: SiNodedotjs, color: '#339933' },
+  { name: 'Express', Icon: SiExpress, color: '#000000' },
+  { name: 'TypeScript', Icon: SiTypescript, color: '#3178C6' },
+  { name: 'JavaScript', Icon: SiJavascript, color: '#F7DF1E' },
+  { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06B6D4' },
+  { name: 'MongoDB', Icon: SiMongodb, color: '#47A248' },
+  { name: 'MySQL', Icon: SiMysql, color: '#4479A1' },
+  { name: 'Firebase', Icon: SiFirebase, color: '#FFCA28' },
+  { name: 'AWS', Icon: FaAws, color: '#FF9900' },
+  { name: 'Docker', Icon: SiDocker, color: '#2496ED' },
+  { name: 'GitHub Actions', Icon: SiGithubactions, color: '#2088FF' },
+  { name: 'Vercel', Icon: SiVercel, color: '#000000' },
+  { name: 'Git', Icon: SiGit, color: '#F05032' },
+  { name: 'GitHub', Icon: SiGithub, color: '#181717' },
+  { name: 'Postman', Icon: SiPostman, color: '#FF6C37' },
+  { name: 'VS Code', Icon: VscVscode, color: '#007ACC' },
+  { name: 'Figma', Icon: SiFigma, color: '#F24E1E' },
 ];
 
 export const workData = [

@@ -1,9 +1,15 @@
 import { assets, siteData, workData } from '@/assets/assets';
 import Image from 'next/image';
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'motion/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
 
 const Work = ({ isDarkMode }) => {
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -44,7 +50,7 @@ const Work = ({ isDarkMode }) => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 0.6 }}
-        className="grid lg:grid-cols-3 gap-6 my-10"
+        className="hidden md:grid lg:grid-cols-3 md:grid-cols-2 gap-6 my-10"
       >
         {workData.map((project) => (
           <motion.article
@@ -101,6 +107,84 @@ const Work = ({ isDarkMode }) => {
           </motion.article>
         ))}
       </motion.div>
+
+      <div className="md:hidden my-10 -mx-[11%] px-2">
+        <Swiper
+          modules={[Navigation]}
+          onBeforeInit={(swiper) => {
+            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.nextEl = nextRef.current;
+          }}
+          navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+          slidesPerView={1}
+          spaceBetween={16}
+          loop
+        >
+          {workData.map((project) => (
+            <SwiperSlide key={project.title} className="h-auto pb-2">
+              <article className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/5 h-full">
+                <div
+                  className="relative h-56 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${project.bgImage})` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+                  <div className="absolute left-5 right-5 bottom-5 text-white">
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/75">{project.description}</p>
+                    <h3 className="text-2xl font-semibold leading-tight">{project.title}</h3>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <p className="text-sm leading-6 text-gray-600 dark:text-white/75">{project.summary}</p>
+
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {project.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-700 dark:border-white/15 dark:text-white/80"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="grid gap-3 mt-6">
+                    {project.metrics.map((metric) => (
+                      <div
+                        key={metric}
+                        className="rounded-2xl bg-[#f6f3ff] px-4 py-3 text-sm leading-6 text-gray-700 dark:bg-white/5 dark:text-white/75"
+                      >
+                        {metric}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <button
+            ref={prevRef}
+            aria-label="Previous"
+            className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-500 text-gray-700 hover:bg-lightHover duration-300 dark:border-white/50 dark:text-white dark:hover:bg-darkHover"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            ref={nextRef}
+            aria-label="Next"
+            className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-500 text-gray-700 hover:bg-lightHover duration-300 dark:border-white/50 dark:text-white dark:hover:bg-darkHover"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
       <motion.a
         initial={{ opacity: 0 }}

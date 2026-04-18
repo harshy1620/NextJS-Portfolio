@@ -41,7 +41,7 @@ const Experience = () => {
         engineering background that keeps execution structured and outcome-focused.
       </motion.p>
 
-      <div className="grid gap-6">
+      <div className="grid gap-6 -mx-[11%] px-2 md:mx-0 md:px-0">
         {experienceData.map((item, index) => (
           <motion.div
             key={item.company}
@@ -91,7 +91,7 @@ const Experience = () => {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6 mt-8">
+      <div className="grid lg:grid-cols-2 gap-6 mt-8 -mx-[11%] px-2 md:mx-0 md:px-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -43,7 +43,7 @@ const Skills = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 0.6 }}
-        className="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
+        className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 -mx-[11%] px-2 md:mx-0 md:px-0"
       >
         {skillGroups.map((group) => (
           <motion.div

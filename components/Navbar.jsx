@@ -43,7 +43,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
         </a>
 
         <ul
-          className={`hidden md:flex items-center gap-5 lg:gap-7 rounded-full px-8 lg:px-10 py-3 ${
+          className={`hidden md:flex items-center gap-5 lg:gap-7 rounded-full px-8 lg:px-10 py-3 absolute left-1/2 -translate-x-1/2 ${
             isScroll ? '' : 'bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent'
           }`}
         >

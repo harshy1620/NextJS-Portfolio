@@ -82,13 +82,16 @@ const About = ({ isDarkMode }) => {
           transition={{ delay: 1.5, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-3 sm:gap-5"
         >
-          {toolsData.map((tool, index) => (
+          {toolsData.map(({ name, Icon, color }) => (
             <motion.li
-              whileHover={{ scale: 1.1 }}
-              className="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500 bg-white/70 dark:bg-white/5"
-              key={`${index}-${tool.src}`}
+              whileHover={{ scale: 1.1, y: -4 }}
+              className="group relative flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer duration-300 bg-white/70 dark:bg-white/5"
+              key={name}
             >
-              <Image src={tool} alt="Tool" className="w-5 sm:w-7" />
+              <Icon size={26} style={{ color }} />
+              {/* <span className="pointer-events-none absolute -bottom-7 text-xs text-gray-700 dark:text-white/80 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                {name}
+              </span> */}
             </motion.li>
           ))}
         </motion.ul>
