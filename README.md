@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Harsh Yadav — Portfolio
 
-## Getting Started
+Personal portfolio website showcasing my work as a Full Stack Developer. Built with Next.js 15, deployed on AWS via an automated CI/CD pipeline.
 
-First, run the development server:
+**Live:** https://d2oat8oeneh958.cloudfront.net
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech stack
+
+- **Framework:** Next.js 15 (App Router) + React 19
+- **Styling:** Tailwind CSS with dark mode
+- **Animations:** Framer Motion (`motion/react`)
+- **Carousel:** Swiper.js (mobile sliders)
+- **Typewriter effect:** `react-type-animation`
+- **Icons:** `react-icons` (Simple Icons, FontAwesome)
+- **Contact form:** Web3Forms
+- **Hosting:** AWS S3 + CloudFront
+- **CI/CD:** GitHub Actions
+
+---
+
+## Features
+
+- Responsive layout with mobile-first carousels for Work, Services, Education, and Skills
+- Dark mode with OS preference + `localStorage` persistence
+- Animated hero with cycling role titles
+- Contact form with toast notifications (Web3Forms integration)
+- Downloadable resume
+- Centralized content in `assets/assets.js` for easy updates
+- Fully static output — deployed to S3 + CloudFront CDN
+
+---
+
+## Project structure
+
+```
+portfolio/
+├── app/
+│   ├── layout.js          Root layout (fonts, metadata)
+│   ├── page.js            Homepage — renders all sections
+│   └── globals.css        Tailwind + global styles
+├── components/
+│   ├── Navbar.jsx
+│   ├── Header.jsx
+│   ├── About.jsx
+│   ├── Skills.jsx
+│   ├── Services.jsx
+│   ├── Experience.jsx
+│   ├── Work.jsx
+│   ├── Contact.jsx
+│   └── Footer.jsx
+├── assets/
+│   └── assets.js          Central content/data file
+├── public/                Static files (resume, images)
+├── .github/workflows/
+│   └── deploy.yml         CI/CD pipeline
+├── next.config.mjs        Static export config
+└── tailwind.config.mjs    Theme + dark mode config
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Local setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 1. Clone
+git clone https://github.com/harshy1620/NextJS-Portfolio.git
+cd NextJS-Portfolio
 
-## Learn More
+# 2. Install dependencies
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# 3. Environment variables
+# Create .env.local with:
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_web3forms_key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 4. Run dev server
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000).
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Build & deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Local build
+
+```bash
+npm run build     # Produces static output in out/
+```
+
+### Production deployment (automated)
+
+Every push to `main` triggers the CI/CD pipeline:
+
+```
+push to main
+    ↓
+GitHub Actions
+    ├── Checkout code
+    ├── Setup Node 20
+    ├── npm ci
+    ├── npm run lint
+    ├── npm run build  (env vars injected from secrets)
+    ├── Configure AWS credentials
+    ├── aws s3 sync ./out s3://bucket --delete
+    └── aws cloudfront create-invalidation --paths "/*"
+    ↓
+Live on CloudFront (~2 min end-to-end)
+```
+
+### Required GitHub Actions secrets
+
+| Secret | Purpose |
+|---|---|
+| `AWS_ACCESS_KEY_ID` | IAM user access key |
+| `AWS_SECRET_ACCESS_KEY` | IAM user secret |
+| `AWS_REGION` | `ap-south-1` |
+| `AWS_S3_BUCKET_NAME` | Target S3 bucket |
+| `AWS_CLOUDFRONT_DISTRIBUTION_ID` | CloudFront distribution for cache invalidation |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Baked into build for contact form |
+
+---
+
+## Infrastructure
+
+```
+User → CloudFront (HTTPS, 450+ edges, cached)
+              ↓ OAC
+       Private S3 bucket (origin)
+```
+
+- **S3 bucket** is private — direct access blocked
+- **CloudFront Origin Access Control (OAC)** is the only way content is accessed
+- **ACM certificate** provides free HTTPS via the default `*.cloudfront.net` domain
+
+---
+
+## Scripts
+
+```bash
+npm run dev       # Dev server with Turbopack
+npm run build     # Production static export → out/
+npm run start     # Serve production build locally
+npm run lint      # ESLint check
+```
+
+---
+
+## License
+
+Personal project — not licensed for redistribution.
