@@ -87,7 +87,7 @@ export const siteData = {
   email: 'harshyadav6642@gmail.com',
   github: 'https://github.com/harshy1620',
   linkedin: 'https://www.linkedin.com/in/harsh-yadav-b49b0a140',
-  resumePath: '/Harsh_Yadav_FrontEnd_Developer_Resume.pdf',
+  resumePath: '/Harsh_Yadav_FrontendDeveloper_Resume.pdf',
   heroRoles: ['Full Stack Developer', 'React Developer', 'Frontend Developer', 'Next.js Developer'],
   heroTitleSuffix: 'building fast, scalable digital products.',
   heroDescription:
