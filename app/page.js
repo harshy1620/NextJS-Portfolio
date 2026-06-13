@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import Services from '../components/Services';
 import Skills from '../components/Skills';
 import Work from '../components/Work';
+import ChatWidget from '../components/chatbot/ChatWidget';
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -45,6 +46,7 @@ export default function Home() {
       <Work isDarkMode={isDarkMode} />
       <Contact isDarkMode={isDarkMode} />
       <Footer isDarkMode={isDarkMode} />
+      <ChatWidget />
     </>
   );
 }
